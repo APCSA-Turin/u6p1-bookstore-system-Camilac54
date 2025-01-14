@@ -37,12 +37,16 @@ public class User{
         book = newBook;
     }
 
-    //public String bookListInfo(){ //returns a booklist for the user, if empty, output "empty"}
-
+    public String bookListInfo() { //returns a booklist for the user, if empty, output "empty"}
+        if (book.isEmpty()) {
+            String str = "\nempty\nempty\nempty\nempty\nempty\n"; 
+        } else {
+            String str = book.bookInfo();
+        }
+    }
 
     public String userInfo(){ //returns  "Name: []\nID: []\nBooks:\n[]"
-        String str =    "Name:" + name + "\nID: " + ID + "\nBooks:\n[]";
+        String str =    "Name:" + name + "\nID: " + ID + "\nBooks:\n" + bookListInfo();
         return str;
     }
-       
 }
