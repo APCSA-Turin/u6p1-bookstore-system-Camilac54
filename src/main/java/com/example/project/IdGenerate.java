@@ -8,11 +8,11 @@ public class IdGenerate{ //This class contains statics variable and methods, you
     // //requires one empty constructor
     public IdGenerate() {}
 
-    public static String getCurrentId() {
+    public static String getCurrentId() { // returns the value of currentID(an int) and changes it to a String
         return String.valueOf(currentID);
     }
 
-    public static void reset() {//must reset the currentId back to 99
+    public static void reset() { //must reset the currentId back to 99
         currentID = 99;
     }
 
