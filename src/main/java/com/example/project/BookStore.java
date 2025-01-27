@@ -17,7 +17,7 @@ public class BookStore{
 
 
     public void setUsers(User[] newUsers) {
-        for (int i = 0; i < newUsers.length; i ++) {
+        for (int i = 0; i < newUsers.length; i ++) { // iterate through all the values of users and change them to the corresponding value of newUsers
             users[i] = newUsers[i];
         }
     }
@@ -76,6 +76,7 @@ public class BookStore{
             }
         }
         users = temp;
+
     }
 
 
@@ -93,27 +94,28 @@ public class BookStore{
         if (index < 0 || index >= books.length) {
             return;
         }
-        // Shift the books one position to the right to make space for the new book
+        // shift the books one position to the right to make space for the new book
         for (int i = books.length - 1; i > index; i--) {
             books[i] = books[i - 1];
         }
-        books[index] = book;  // Insert the book at the specified index
+        books[index] = book;  // insert the book at the specified index
     }
 
 
     public void removeBook(Book book) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] != null && books[i].getIsbn().equals(book.getIsbn())) {
-                // Shift all books to the left to remove the current book
-                for (int j = i; j < books.length - 1; j++) {
-                    books[j] = books[j + 1];
+        for (int i = 0; i < books.length; i ++) {
+            if (books[i] != null && books[i].equals(book)) {
+                if (books[i].getQuantity() > 1) {
+                    books[i].setQuantity(books[i].getQuantity() - 1);
+                } else {
+                    for (int j = i; j < books.length - 1; j ++) {
+                        books[j] = books[j + 1];
+                    }
+                    books[books.length - 1] = null;
                 }
-                books[books.length - 1] = null;  // Set the last book to null
                 return;
             }
-        }
-
-
+        }    
     }
 }
        
