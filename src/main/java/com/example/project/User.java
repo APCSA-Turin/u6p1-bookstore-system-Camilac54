@@ -46,7 +46,6 @@ public class User{
                 str += books[i].bookInfo() + "\n";
             }
         }
-
         return str;
     
     }

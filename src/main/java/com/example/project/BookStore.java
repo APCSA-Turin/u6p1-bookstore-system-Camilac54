@@ -1,16 +1,16 @@
 package com.example.project;
 
+
 public class BookStore{
  
-    //requires at least 2 attributes Book[] books, User[] users (initialized to an empty array of 10 max users) 
+    //requires at least 2 attributes Book[] books, User[] users (initialized to an empty array of 10 max users)
     private Book[] books = new Book[10];
     private User[] users = new User[10];
-    private int bookCount = 0;
-    private int userCount = 0;
+
 
     //requires 1 empty constructor
     public BookStore() {}
-    
+   
     public User[] getUsers() {
         int count = 0;
         for (User user : users) {
@@ -27,13 +27,16 @@ public class BookStore{
         }
         return userLast;
 
+
     }
+
 
     public void setUsers(User[] newUsers) {
         for (int i = 0; i < newUsers.length; i ++) {
             users[i] = newUsers[i];
         }
     }
+
 
     public Book[] getBooks() {
         int count = 0;
@@ -42,6 +45,7 @@ public class BookStore{
                 count ++;
             }
         }
+
 
         Book[] bookLast = new Book[count];
         int idx = 0;
@@ -53,50 +57,68 @@ public class BookStore{
         return bookLast;
     }
 
+
     public void addUser(User user) {
         for (int i = 0; i < users.length; i ++) {
             if (users[i] == null) {
                 users[i] = user;
-                break;
             }
         }
-    } 
+
+        for (int i = 0; i < users.length; i ++) {
+            if (users[i] == null) {
+                users[i] = null;
+            }
+        }
+    }
+
 
     public void removeUser(User user) {
         for (int i = 0; i < users.length; i ++) {
             if (users[i] != null && users[i].equals(user)) {
                 users[i] = null;
+                consolidateUsers();
+                break;
             }
         }
-        consolidateUsers();
     }
+
 
     public void consolidateUsers() {
         User[] temp = new User[users.length];
         int idx = 0;
 
+
         for (User user : users) {
             if (user != null) {
-                temp[idx] = user;
-                idx ++;
+                temp[idx++] = user;
             }
         }
         users = temp;
     }
 
+
     public void addBook(Book book) {
-        if (bookCount < books.length) {
-            books[bookCount ++] = book;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) {
+                books[i] = book;
+                break;
+            }
         }
     }
+
 
     public void insertBook(Book book, int index) {
         if (index < 0 || index >= books.length) {
             return;
         }
-
-        books[index] = book;
+        // Shift the books one position to the right to make space for the new book
+        for (int i = books.length - 1; i > index; i--) {
+            books[i] = books[i - 1];
+        }
+        books[index] = book;  // Insert the book at the specified index
     }
+
 
     public void removeBook(Book book) {
         for (int i = 0; i < books.length; i++) {
@@ -110,10 +132,15 @@ public class BookStore{
             }
         }
 
+
     }
 }
-        
-    // public String bookStoreBookInfo() {} //you are not tested on this method but use it for debugging purposes 
+       
+    // public String bookStoreBookInfo() {} //you are not tested on this method but use it for debugging purposes
+
 
     // public String bookStoreUserInfo() {} //you are not tested on this method but use it for debugging purposes
+
+
+
 
