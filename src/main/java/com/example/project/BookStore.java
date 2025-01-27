@@ -12,22 +12,7 @@ public class BookStore{
     public BookStore() {}
    
     public User[] getUsers() {
-        int count = 0;
-        for (User user : users) {
-            if (user != null) {
-                count ++;
-            }
-        }
-        User[] userLast = new User[count];
-        int idx = 0;
-        for (User user : users) {
-            if (user != null) {
-                userLast[idx++] = user;
-            }
-        }
-        return userLast;
-
-
+        return users;
     }
 
 
@@ -62,14 +47,10 @@ public class BookStore{
         for (int i = 0; i < users.length; i ++) {
             if (users[i] == null) {
                 users[i] = user;
+                break;
             }
         }
 
-        for (int i = 0; i < users.length; i ++) {
-            if (users[i] == null) {
-                users[i] = null;
-            }
-        }
     }
 
 
