@@ -46,11 +46,13 @@ public class User{
                 str += books[i].bookInfo() + "\n";
             }
         }
+
         return str;
+    
     }
 
     public String userInfo(){ //returns  "Name: []\nID: []\nBooks:\n[]"
-        String str = "Name: " + name + "\nId: " + ID + "\nBooks:\n" + bookListInfo();
+        String str = "Name: " + name + "\nId: " + ID + "\nBooks: \n" + bookListInfo();
         return str;
     }
 }

@@ -5,12 +5,28 @@ public class BookStore{
     //requires at least 2 attributes Book[] books, User[] users (initialized to an empty array of 10 max users) 
     private Book[] books = new Book[10];
     private User[] users = new User[10];
+    private int bookCount = 0;
+    private int userCount = 0;
 
     //requires 1 empty constructor
     public BookStore() {}
     
     public User[] getUsers() {
-        return users;
+        int count = 0;
+        for (User user : users) {
+            if (user != null) {
+                count ++;
+            }
+        }
+        User[] userLast = new User[count];
+        int idx = 0;
+        for (User user : users) {
+            if (user != null) {
+                userLast[idx++] = user;
+            }
+        }
+        return userLast;
+
     }
 
     public void setUsers(User[] newUsers) {
@@ -20,7 +36,21 @@ public class BookStore{
     }
 
     public Book[] getBooks() {
-        return books;
+        int count = 0;
+        for (Book book : books) {
+            if (book != null) {
+                count ++;
+            }
+        }
+
+        Book[] bookLast = new Book[count];
+        int idx = 0;
+        for (Book book : books) {
+            if (book != null) {
+                bookLast[idx++] = book;
+            }
+        }
+        return bookLast;
     }
 
     public void addUser(User user) {
@@ -55,18 +85,13 @@ public class BookStore{
     }
 
     public void addBook(Book book) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] == null) {
-                books[i] = book;
-                break;
-            }
+        if (bookCount < books.length) {
+            books[bookCount ++] = book;
         }
-
     }
 
     public void insertBook(Book book, int index) {
         if (index < 0 || index >= books.length) {
-            System.out.println("Invalid index.");
             return;
         }
 
@@ -74,22 +99,21 @@ public class BookStore{
     }
 
     public void removeBook(Book book) {
-        for (int i = 0; i < books.length; i ++) {
+        for (int i = 0; i < books.length; i++) {
             if (books[i] != null && books[i].getIsbn().equals(book.getIsbn())) {
-                for (int j = i; j < books.length - 1; j ++) {
+                // Shift all books to the left to remove the current book
+                for (int j = i; j < books.length - 1; j++) {
                     books[j] = books[j + 1];
                 }
-                books[books.length - 1] = null;
-                break;
+                books[books.length - 1] = null;  // Set the last book to null
+                return;
             }
         }
+
     }
-
-        
-   // public String bookStoreBookInfo() { //you are not tested on this method but use it for debugging purposes
-
-    //} 
-
-    // public String bookStoreUserInfo(){} //you are not tested on this method but use it for debugging purposes
-
 }
+        
+    // public String bookStoreBookInfo() {} //you are not tested on this method but use it for debugging purposes 
+
+    // public String bookStoreUserInfo() {} //you are not tested on this method but use it for debugging purposes
+
